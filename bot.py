@@ -161,7 +161,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "🆘 *مساعدة*\n\n"
         "الأوامر المتاحة:\n"
         "• /start - بدء التفاعل مع البوت\n"
-        "• /news - عرض أحدث أخبار Swift وiOS\n"
+        "• /news - عرض أحدث أخبار Swift و iOS\n"
         "• /weather - عرض حالة الطقس باستخدام الموقع\n"
         "• /help - عرض هذه الرسالة\n\n"
         "📍 يمكنك أيضًا الضغط على زر 'مشاركة الموقع'."
