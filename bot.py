@@ -12,17 +12,17 @@ TOKEN = "7961912258:AAG7wiDpZzGSdZZFun_hk6GVZ4bGSz96wxA"  # BOT TOKEN
 # --- Get weather information using Open-Meteo API ---
 def get_weather_by_location(lat, lon):
     # إرسال طلب للحصول على بيانات الطقس
-    url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&current_weather=true&temperature_unit=celsius&windspeed_unit=kmh"
+    url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={lon}&current_weather=true&temperature_unit=celsius&windspeed_unit=kmh&hourly=temperature_2m,relative_humidity_2m"
     response = requests.get(url)
 
     if response.status_code == 200:
         data = response.json()
         
         current_weather = data["current_weather"]
-        temperature = current_weather["temperature"]
-        weather_description = current_weather["weathercode"]
-        wind_speed = current_weather["windspeed"]
-        humidity = current_weather["humidity"]
+        temperature = current_weather.get("temperature", "N/A")
+        weather_description = current_weather.get("weathercode", "N/A")
+        wind_speed = current_weather.get("windspeed", "N/A")
+        humidity = current_weather.get("relative_humidity_2m", "N/A") 
 
         # التنسيق
         weather_text = (
@@ -118,12 +118,15 @@ def start_news_scheduler(application: Application):
 
 # --- BOT START COMMAND ---
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    keyboard = [[KeyboardButton("مشاركة الموقع", request_location=True)]]
+    keyboard = [
+        [KeyboardButton("مشاركة الموقع", request_location=True)],  # زر لمشاركة الموقع
+    ]
     reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
     await update.message.reply_text(
         "مرحبًا! 🚀\n"
         "- شارك موقعك للحصول على حالة الطقس.\n"
         "- أرسل /news لمعرفة أحدث أخبار Swift وiOS.\n"
+        "- أرسل /weather لعرض حالة الطقس باستخدام الموقع.\n"
         "- أرسل /help لمعرفة أوامر البوت.",
         reply_markup=reply_markup
     )
