@@ -152,7 +152,7 @@ async def handle_location(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def news_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """عرض آخر 5 أخبار من مصادر iOS."""
     news_text = await fetch_news()
-    message = "📰 *آخر 5 أخبار في عالم iOS وSwift:*\n\n" + news_text
+    message = "📰 *آخر 5 أخبار في عالم iOS و Swift*\n\n" + news_text
     await update.message.reply_text(message, parse_mode="Markdown")
 
 # --- BOT HELP COMMAND ---
